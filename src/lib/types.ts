@@ -23,6 +23,7 @@ export interface Run {
 }
 
 export interface LeaderboardEntry {
+  id: string;
   rank: number;
   player_uuid: string;
   username: string;

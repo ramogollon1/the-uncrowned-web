@@ -1,6 +1,6 @@
-@import "tailwindcss";
-
 @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Press+Start+2P&display=swap');
+
+@import "tailwindcss";
 
 :root {
   --bg: #0F1220;
