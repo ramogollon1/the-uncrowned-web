@@ -1,0 +1,44 @@
+@import "tailwindcss";
+
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Press+Start+2P&display=swap');
+
+:root {
+  --bg: #0F1220;
+  --surface: #1A2948;
+  --border: #3A5080;
+  --accent: #74CFFF;
+  --accent-dim: #4A99CC;
+  --text: #FFFFFF;
+  --text-muted: #C0C7E6;
+  --text-dim: #7A8AAE;
+  --gold: #FFD060;
+  --red: #FF4444;
+  --green: #44FF88;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  background-color: var(--bg);
+  color: var(--text);
+  font-family: 'Cinzel', serif;
+  min-height: 100vh;
+}
+
+/* scrollbar temática */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent-dim);
+}
