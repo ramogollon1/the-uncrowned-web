@@ -32,5 +32,7 @@ export async function GET() {
     avg_score,
     weapon_distribution,
     enchantment_distribution,
+  }, {
+    headers: { "Cache-Control": "public, s-maxage=120, stale-while-revalidate=300" },
   });
 }

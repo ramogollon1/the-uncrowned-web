@@ -24,5 +24,7 @@ export async function GET(req: NextRequest) {
 
   const entries = (data ?? []).map((row, i) => ({ rank: i + 1, ...row }));
 
-  return NextResponse.json({ entries });
+  return NextResponse.json({ entries }, {
+    headers: { "Cache-Control": "public, s-maxage=60, stale-while-revalidate=120" },
+  });
 }

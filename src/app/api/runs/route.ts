@@ -3,7 +3,27 @@ import { supabase } from "@/lib/supabase";
 import { calculateScore } from "@/lib/score";
 import type { SubmitRunPayload } from "@/lib/types";
 
+// Rate limit en memoria: máx 10 runs por IP en 60 segundos
+const _ipWindows = new Map<string, { count: number; reset: number }>();
+const RATE_LIMIT = 10;
+const WINDOW_MS = 60_000;
+
+function isRateLimited(ip: string): boolean {
+  const now = Date.now();
+  const entry = _ipWindows.get(ip);
+  if (!entry || now > entry.reset) {
+    _ipWindows.set(ip, { count: 1, reset: now + WINDOW_MS });
+    return false;
+  }
+  entry.count += 1;
+  return entry.count > RATE_LIMIT;
+}
+
 export async function POST(req: NextRequest) {
+  const ip = req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ?? "unknown";
+  if (isRateLimited(ip)) {
+    return NextResponse.json({ error: "Too many requests" }, { status: 429 });
+  }
   let body: SubmitRunPayload;
 
   try {
